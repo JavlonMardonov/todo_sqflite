@@ -58,8 +58,10 @@ class TodoContainer extends StatelessWidget {
               Text(
                 todo.title.toString(),
                 style: TextStyle(
-                  color: todo.status == 1 ? Colors.grey.shade400 : Colors.black,
-                ),
+                    color:
+                        todo.status == 1 ? Colors.grey.shade400 : Colors.black,
+                    decoration:
+                        todo.status == 1 ? TextDecoration.lineThrough : null),
               ),
             ],
           ),
