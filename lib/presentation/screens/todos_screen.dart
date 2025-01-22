@@ -113,7 +113,6 @@ class _TodosScreenState extends State<TodosScreen>
                     );
                   }
 
-                  // Filter todos based on selected date
                   final todosData = todoProvider.todos.where((todo) {
                     return selectedDay2 != null &&
                         DateUtils.isSameDay(todo.date, selectedDay2!);
@@ -129,42 +128,20 @@ class _TodosScreenState extends State<TodosScreen>
                     itemCount: todosData.length,
                     itemBuilder: (context, index) {
                       final TodoModel todo = todosData[index];
-                      return Slidable(
-                        key: ValueKey(index),
-                        endActionPane: ActionPane(
-                          extentRatio: 0.6,
-                          motion: DrawerMotion(),
-                          children: [
-                            SlidableAction(
-                              flex: 1,
-                              spacing: 8,
-                              borderRadius: BorderRadius.circular(20),
-                              onPressed: (_) => deleteDialog(
-                                provider: todoProvider,
-                                id: todo.id!,
-                              ),
-                              icon: Icons.delete,
-                              foregroundColor: Colors.white,
-                              backgroundColor: Colors.red,
-                            ),
-                            SlidableAction(
-                              flex: 1,
-                              borderRadius: BorderRadius.circular(20),
-                              onPressed: (_) {
-                                updateTodo(context: context, id: todo.id!);
-                              },
-                              icon: Icons.edit,
-                              foregroundColor: Colors.white,
-                              backgroundColor: Colors.green,
-                            )
-                          ],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: TodoContainer(
-                            todo: todo,
-                            todoProvider: todoProvider,
-                          ),
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: TodoContainer(
+                          todo: todo,
+                          todoProvider: todoProvider,
+                          delete: () {
+                            deleteDialog(
+                              provider: todoProvider,
+                              id: todo.id!,
+                            );
+                          },
+                          update: () {
+                            updateTodo(context: context, id: todo.id!);
+                          },
                         ),
                       );
                     },

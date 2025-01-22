@@ -1,19 +1,23 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:todo_app_sqflite/data/models/todo_model.dart';
+import 'package:todo_app_sqflite/presentation/widgets/custom_container.dart';
 import 'package:todo_app_sqflite/providers/todo_provider.dart';
 
 class TodoContainer extends StatelessWidget {
   final TodoModel todo;
   final TodoProvider todoProvider;
+  final VoidCallback update;
+  final VoidCallback delete;
   const TodoContainer({
     super.key,
     required this.todo,
     required this.todoProvider,
+    required this.update,
+    required this.delete,
   });
 
   @override
@@ -63,6 +67,22 @@ class TodoContainer extends StatelessWidget {
                     decoration:
                         todo.status == 1 ? TextDecoration.lineThrough : null),
               ),
+              Spacer(),
+              SizedBox(width: 10),
+              CustomContainer(
+                icon: Icons.edit,
+                onTapFunc: update,
+                containerColor: Colors.blueAccent,
+              ),
+              SizedBox(width: 10),
+              CustomContainer(
+                icon: Icons.delete,
+                onTapFunc: delete,
+                containerColor: Colors.red,
+              ),
+              SizedBox(
+                width: 10,
+              )
             ],
           ),
         );
