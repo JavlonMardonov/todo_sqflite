@@ -39,7 +39,7 @@ class _TodosScreenState extends State<TodosScreen>
                 Navigator.of(context).pop();
               },
               style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.amber.shade300,
+                  backgroundColor: Colors.blueAccent.shade200,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   )),
